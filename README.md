@@ -1,4 +1,4 @@
-# CHBP
+# CBSH2-RTC-CHBP
 An improvement technique of Conflict-Based Search (CBS) [1] for Multi-Agent Path Finding (MAPF).
 CHBP reasons the conflicts beyond the two agents and allow us to (i) generate stronger heuristics; and (ii) explore more bypasses. 
 CHBP can seamlessly integrate with the current state-of-the-art solver CBSH2-RTC. 
@@ -69,10 +69,7 @@ All maps and scenario files are included in the "/dataset" folder.
 
 
 
-## To AAAI Reviewers 
-We thank all anonymous reviewers for their time in reviewing our code.
-We have included the comments detailing the implementation of CHBP, 
-with references to the paper where each step comes from. 
+## Guideline
 Here, we give a short guideline in order to access our codes:
 
 - Our implementation mainly modifies the following files:
@@ -99,8 +96,11 @@ Please install them properly. Once installed, please go to "/analysis" folder:
       ```shell script
       jupyter notebook experiments.ipynb
       ```
+Contact
+===========================================================
+For any question, please contact Bojie.Shen@monash.edu.
 
-**Note that the license is removed for anonymous purposes. Please do not distribute the codes.**
+[//]: # (**Note that the license is removed for anonymous purposes. Please do not distribute the codes.**)
 ## References
 
 [1] Guni Sharon, Roni Stern, Ariel Felner, and Nathan R. Sturtevant.

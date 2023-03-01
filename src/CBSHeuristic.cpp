@@ -1451,7 +1451,7 @@ result_type CBSHeuristic::findClusterOrBypass(CBSNode& curr, int a_m, Path& bypa
         }
 
         if(path_not_existed){
-            //--------BEGIN: Algorithm 2 line 13-16 (get min conflict path from MDD and update CA)--------------------------------------
+            //--------BEGIN: Algorithm 2 line 13-15 (get min conflict path from MDD and update CA)--------------------------------------
             // change the current path to an alternative path.
             path_modified = true;
             if(!mdd_soft_copy.is_labeled){
@@ -1473,9 +1473,9 @@ result_type CBSHeuristic::findClusterOrBypass(CBSNode& curr, int a_m, Path& bypa
                 else
                     ++it;
             }
-            //--------END: Algorithm 2 line 13-16 (get min conflict path from MDD and update CA)----------------------------------------
+            //--------END: Algorithm 2 line 13-15 (get min conflict path from MDD and update CA)----------------------------------------
         }else{
-            //----------------------BEGIN: Algorithm 2 line 17 (return Bypass if CA reduced)--------------------------------------------
+            //----------------------BEGIN: Algorithm 2 line 16 (return Bypass if CA reduced)--------------------------------------------
             if(path_modified && curr_num_of_conflict < original_num_of_conflict){
                 // found bypass, if the number of conflicts of a_m reduced.
                 if(applyBypass){
@@ -1486,7 +1486,7 @@ result_type CBSHeuristic::findClusterOrBypass(CBSNode& curr, int a_m, Path& bypa
                 // return found nothing.
                 return result_type::FNCNP;
             }
-            //----------------------END: Algorithm 2 line 17 (return Bypass if CA reduced)----------------------------------------------
+            //----------------------END: Algorithm 2 line 16 (return Bypass if CA reduced)----------------------------------------------
         }
     }
 
@@ -1499,14 +1499,14 @@ int CBSHeuristic::computeClusterHeuristicAndBypass(CBSNode& curr, vector<bool>& 
     filterCluster(curr,cluster_heuristic,excluded_agents);
     //--------------END: Algorithm 1 line 2 (inherit cluster from parent)---------------------------------------------------------------
 
-    //------------------BEGIN: Algorithm 1 line 3 (build conflict state graph)----------------------------------------------------------
+    //------------------BEGIN: Algorithm 1 line 4 (build conflict state graph)----------------------------------------------------------
     // create conflict state graph, SG, of the current node.
     vector<bool> SG(num_of_agents* num_of_agents, false);
     for(const auto& c: curr.conflicts){
         SG[c->a1 * num_of_agents + c->a2] = true;
         SG[c->a2 * num_of_agents + c->a1] = true;
     }
-    //------------------END: Algorithm 1 line 3 (build conflict state graph)------------------------------------------------------------
+    //------------------END: Algorithm 1 line 4 (build conflict state graph)------------------------------------------------------------
     // processed agent: PA
     vector<bool> processed_agent(num_of_agents,false);
     // agent which has maximal number of conflicts;
@@ -1520,12 +1520,12 @@ int CBSHeuristic::computeClusterHeuristicAndBypass(CBSNode& curr, vector<bool>& 
             return -1;
         }
 
-        //-----------------------BEGIN: Algorithm 1 line 4-5 (select a_m from SG)-------------------------------------------------------
+        //-----------------------BEGIN: Algorithm 1 line 5 (select a_m from SG)-------------------------------------------------------
         // get a_m from SG that is not been processed or excluded.
         // Algorithm 1 line 11:  a_m is marked as PA inside this function.
         a_m = getMaxConflictAgent(processed_agent,excluded_agents,SG);
         if(a_m == -1) break;
-        //-----------------------END: Algorithm 1 line 4-5 (select a_m from SG)---------------------------------------------------------
+        //-----------------------END: Algorithm 1 line 5 (select a_m from SG)---------------------------------------------------------
 
         //-----------------------BEGIN: Algorithm 1 line 6 (detect cluster or bypass)---------------------------------------------------
         // detecting cluster and bypass of a_m, this function refers to Algorithm 2 of our paper.
@@ -1650,7 +1650,7 @@ int CBSHeuristic::computeClusterHeuristicAndBypass(CBSNode& curr, vector<bool>& 
             if (!curr.bypassFound) curr.bypassFound  = true;
         }
     }
-    //-------------------------BEGIN: Algorithm 1 line 15 (return heuristic)------------------------------------------------------------------
+    //-------------------------BEGIN: Algorithm 1 line 14 (return heuristic)------------------------------------------------------------------
     return cluster_heuristic;
-    //-------------------------END: Algorithm 1 line 15 (return heuristic)--------------------------------------------------------------------
+    //-------------------------END: Algorithm 1 line 14 (return heuristic)--------------------------------------------------------------------
 }
