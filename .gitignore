@@ -1,0 +1,13 @@
+.idea
+cmake-*
+CMakeFiles
+cmake_install.cmake
+Makefile
+CMakeCache.txt
+.README.md.swp
+bin
+cbs
+results
+Testing
+.cmake
+*.csv
